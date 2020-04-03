@@ -9,4 +9,17 @@ export default StyleSheet.create({
     padding: 0,
     height: 56,
   },
+  countryPickerText: {
+    fontSize: 25
+  },
+  clearText: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: 'bold'
+  },
+  hidePickerWrapper: {
+    position: 'absolute',
+    top: -20,
+    left: 0
+  }
 });

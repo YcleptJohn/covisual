@@ -11,4 +11,12 @@ export default StyleSheet.create({
     paddingLeft: padding.sm,
     paddingRight: padding.sm,
   },
+  title: {
+    fontSize: 25,
+    color: 'white',
+    fontWeight: 'bold'
+  },
+  notificationLink: {
+    fontSize: 25
+  }
 });
