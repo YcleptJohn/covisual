@@ -56,6 +56,8 @@ target 'covisual' do
 
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'covisualTests' do
     inherit! :complete
     # Pods for testing
