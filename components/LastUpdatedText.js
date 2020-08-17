@@ -5,7 +5,6 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 import { Text } from 'react-native';
 
-
 const LastUpdatedText = (props) => {
   const tz = RNLocalize.getTimeZone()
   return (
