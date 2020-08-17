@@ -32,31 +32,6 @@ class OverviewPage extends React.Component {
     this.fetch();
   }
 
-  // async fetchData(countryCode) {
-  //   const isRefresh = countryCode === 'REFRESH'
-  //   this.setState({
-  //     fetchStatus: statusConstants.IN_PROGRESS,
-  //     isRefresh
-  //   });
-  //   if (isRefresh) countryCode = this.state.target && this.state.target.countryCode;
-  //   let data;
-  //   try {
-  //     const result = await fetch(
-  //       countryCode ? `${byCountryEndpoint}${countryCode}` : globalEndpoint,
-  //     );
-  //     data = await result.json();
-  //   } catch (e) {
-  //     return this.setState({
-  //       fetchStatus: statusConstants.COMPLETED_ERRONEOUSLY,
-  //     });
-  //   }
-  //   this.setState({
-  //     data,
-  //     fetchStatus: statusConstants.COMPLETED_SUCCESSFULLY,
-  //     isRefresh: null
-  //   });
-  // }
-
   async fetch(countryCode) {
     const target = this.state.target
     const isRefresh = countryCode === 'REFRESH'
@@ -90,13 +65,10 @@ class OverviewPage extends React.Component {
   }
 
   async fetchHistoricalData(countryCode) {
-    if (!countryCode) return this.setState({
-      hData: null,
-      hFetchStatus: statusConstants.COMPLETED_ERRONEOUSLY
-    })
+    if (!countryCode) countryCode = 'all'
     let hData;
     try {
-      const result = await fetch(`${historicalEndpoint}${countryCode}`)
+      const result = await fetch(`${historicalEndpoint}${countryCode}?lastdays=all`)
       hData = await result.json()
     } catch (e) {
       return this.setState({
@@ -111,16 +83,17 @@ class OverviewPage extends React.Component {
 
   pruneHistoricalData(hData) {
     // Remove the initial days where the country had zero cases
-    for (let kv of Object.entries(hData.timeline.cases)) {
+    let timeline = hData.timeline || hData
+    for (let kv of Object.entries(timeline.cases)) {
       if (kv[1] === 0) {
-        delete hData.timeline.cases[kv[0]]
-        delete hData.timeline.deaths[kv[0]]
-        delete hData.timeline.recovered[kv[0]]
+        delete timeline.cases[kv[0]]
+        delete timeline.deaths[kv[0]]
+        delete timeline.recovered[kv[0]]
       } else {
         break;
       }
     }
-    this.setState({ hData })
+    this.setState({ hData: timeline })
   }
 
   setCountry(country) {
@@ -129,12 +102,14 @@ class OverviewPage extends React.Component {
         countryCode: country.cca2,
         country,
       },
+      hData: null,
+      data: null
     });
     this.fetch(country.cca2);
   }
 
   clearCountry() {
-    this.setState({target: null});
+    this.setState({ target: null, hData: null, data: null });
     this.fetch();
   }
 
@@ -176,12 +151,12 @@ class OverviewPage extends React.Component {
             <SingleStat 
               label={'Total Cases'}
               value={data && data.cases}
-              suffix={data && data.casesPerOneMillion && `Per million people: ${data.casesPerOneMillion}`}
+              suffix={(data && data.casesPerOneMillion) ? `Per million people: ${data.casesPerOneMillion}` : null}
               isLoading={isLoading} />
             <SingleStat
               label={'Deaths'}
               value={data && data.deaths}
-              suffix={data && data.deathsPerOneMillion && `Per million people: ${data.deathsPerOneMillion}`}
+              suffix={(data && data.deathsPerOneMillion) ? `Per million people: ${data.deathsPerOneMillion}` : null}
               isLoading={isLoading} />
           </View>
           <View style={styles.multipanelRow}>
@@ -189,9 +164,9 @@ class OverviewPage extends React.Component {
             <SingleStat label={'Recovered'} value={data && data.recovered} isLoading={isLoading} />
           </View>
           <CasesChart 
-            cases={hData && hData.timeline && hData.timeline.cases}
-            deaths={hData && hData.timeline && hData.timeline.deaths}
-            recovered={hData && hData.timeline && hData.timeline.recovered}
+            cases={hData && hData.cases}
+            deaths={hData && hData.deaths}
+            recovered={hData && hData.recovered}
           />
           <Text>{JSON.stringify(this.state.data, null, 2)}</Text>
           <Text>{JSON.stringify(this.state.hData, null, 2)}</Text>
