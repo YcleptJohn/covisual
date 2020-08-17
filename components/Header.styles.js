@@ -14,9 +14,9 @@ export default StyleSheet.create({
   title: {
     fontSize: 25,
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   notificationLink: {
-    fontSize: 25
-  }
+    fontSize: 25,
+  },
 });

@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   body: {
-    backgroundColor: '#f8f8fa'
+    backgroundColor: '#f8f8fa',
   },
   countryLabelContainer: {
     flexDirection: 'column',
@@ -13,6 +13,6 @@ export default StyleSheet.create({
     fontSize: 20,
   },
   multipanelRow: {
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 });

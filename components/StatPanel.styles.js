@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { padding } from '../styles/base.js';
+import {StyleSheet} from 'react-native';
+import {padding} from '../styles/base.js';
 
 export default StyleSheet.create({
   body: {
@@ -7,6 +7,6 @@ export default StyleSheet.create({
     padding: padding.sm,
     backgroundColor: '#e5e6eb',
     borderRadius: 5,
-    flex: 1
-  }
-})
+    flex: 1,
+  },
+});

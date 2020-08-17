@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   body: {
     fontStyle: 'italic',
-    color: 'gray'
+    color: 'gray',
   },
   timeText: {
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+});

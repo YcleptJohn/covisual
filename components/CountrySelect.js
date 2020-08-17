@@ -1,7 +1,5 @@
 import React from 'react';
-import CountryPicker, {
-  CountryModalProvider,
-} from 'react-native-country-picker-modal';
+import CountryPicker from 'react-native-country-picker-modal';
 import {Text, View, TouchableHighlight} from 'react-native';
 import styles from './CountrySelect.styles.js';
 import emojiFlags from 'emoji-flags';
