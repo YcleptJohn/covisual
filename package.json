@@ -12,7 +12,7 @@
   "dependencies": {
     "emoji-flags": "^1.2.0",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.35",
     "react": "16.11.0",
     "react-moment": "^0.9.7",
     "react-native": "0.62.0",
